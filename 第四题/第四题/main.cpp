@@ -13,8 +13,8 @@
 using namespace std;
 
 double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2);
-double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName);
-int getNextMedian(vector<int>& nums1, vector<int>& nums2, int index1, int index2, int arrayName);
+double myFind(vector<int>& nums1, vector<int>& nums2);
+int getNextMedian(vector<int>& nums1, vector<int>& nums2, int index1, int index2);
 double getSingleVectorMedian(vector<int>& nums);
 bool equals(double value, double correntAnswer);
 
@@ -147,17 +147,17 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     if(nums1.size() == 1 && nums2.size() == 1){
         return (double)(nums1[0] + nums2[0]) / 2;
     }
-    double median = myFind(nums1, nums2, 1);
+    double median = myFind(nums1, nums2);
     if(median == -1){
-        return myFind(nums2, nums1, 2);
+        return myFind(nums2, nums1);
     }
     else{
         return median;
     }
 }
 
-double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName){
-    int size1 = nums1.size(), size2 = nums2.size(), left2, right2;
+double myFind(vector<int>& nums1, vector<int>& nums2){
+    int size1 = (int)nums1.size(), size2 = (int)nums2.size(), left2, right2;
     int left1 = 0, right1 = size1 - 1;
     int target = (size1 + size2 - 1) / 2;
     int index1 = 0, index2 = 0;
@@ -188,7 +188,7 @@ double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName){
             if((size1 + size2) % 2 == 1){
                 if(direction > 0){
                     if(direction == 1){
-                        return (double)getNextMedian(nums1, nums2, index1, index2, arrayName);
+                        return (double)getNextMedian(nums1, nums2, index1, index2);
                     }
                     left1 = index1 + 1;
                 }
@@ -202,7 +202,7 @@ double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName){
             else{
                 if(direction > 0){
                     if(direction == 1){
-                        return (double)(nums1[index1] + getNextMedian(nums1, nums2, index1, index2, arrayName)) / 2;
+                        return (double)(nums1[index1] + getNextMedian(nums1, nums2, index1, index2)) / 2;
                     }
                     left1 = index1 + 1;
                 }
@@ -241,7 +241,7 @@ double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName){
                     right1 = index1 - 1;
                 }
                 else if(nums2[index2] <= nums1[index1]){
-                    return (double)(nums1[index1] + getNextMedian(nums1, nums2, index1, index2, arrayName)) / 2;
+                    return (double)(nums1[index1] + getNextMedian(nums1, nums2, index1, index2)) / 2;
                 }
                 else if(nums2[index2] > nums1[index1] && index1 == target){
                     if(index1 != size1 -1 && nums1[index1 + 1] < nums2[index2]){
@@ -258,29 +258,18 @@ double myFind(vector<int>& nums1, vector<int>& nums2, int arrayName){
     return -1;
 }
 
-int getNextMedian(vector<int>& nums1, vector<int>& nums2, int index1, int index2, int arrayName){
+int getNextMedian(vector<int>& nums1, vector<int>& nums2, int index1, int index2){
     if(index1 == nums1.size() - 1){
         return nums2[index2 + 1];
     }
     if(index2 == nums2.size() -1 ){
         return nums1[index1 + 1];
     }
-//    if (index2 == 0 && ) {
-//        <#statements#>
-//    }
-//    if (nums1[index1] < nums2[index2]) {
-//        return nums1[index1 + 1] < nums2[index2 + 1] ? nums1[index1 + 1] : nums2[index2 + 1];
-//    }
-//    else if(nums1[index1] > nums2[index2]){
-//        return nums1[index1 - 1] < nums2[index2 - 1] ? nums1[index2 - 1] : nums2[index1 - 1];
-//    }
-//    else{
-        return nums1[index1 + 1] < nums2[index2 + 1] ? nums1[index1 + 1] : nums2[index2 + 1];
-//    }
+    return nums1[index1 + 1] < nums2[index2 + 1] ? nums1[index1 + 1] : nums2[index2 + 1];
 }
 
 double getSingleVectorMedian(vector<int>& nums){
-    int length = nums.size();
+    int length = (int)nums.size();
     if(length % 2 == 0){
         return (double)(nums[(length - 1) / 2] + nums[(length + 1) / 2]) / 2;
     }
