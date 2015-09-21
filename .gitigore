@@ -48,3 +48,4 @@ Carthage/Build
 *.d
 *.dia
 *.o
+*.hmap
