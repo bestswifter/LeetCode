@@ -1,18 +1,10 @@
-//
-//  main.cpp
-//  第十五题
-//
-//  Created by 张星宇 on 16/1/25.
-//  Copyright © 2016年 zxy. All rights reserved.
-//
+/*
+    题目简介：
+    给定一个数组，找出所有不重复的，和为0的一组三个数
 
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-
-using namespace std;
-
+    解题思想：
+    找两个和为定值的数已经做过，时间复杂度为O（n），本题只要在外面再套一个循环即可
+*/
 vector<vector<int>> threeSum(vector<int>& nums) {
     vector<vector<int>> result;
     if (nums.size() < 3) {
@@ -45,18 +37,4 @@ vector<vector<int>> threeSum(vector<int>& nums) {
         }
     }
     return result;
-}
-
-int main(int argc, const char * argv[]) {
-    vector<int> numbers = {-5,-5,-3,-4,-2,-1,1,0,-1,-2,3,2,5,4,3,6};
-//    vector<int> numbers = {-5,-5,-5,-5,-1,-1,-1,-1,6,6,6,6};
-//    vector<int> numbers = {0,0,0};
-    vector<vector<int>> result = threeSum(numbers);
-    for (int i = 0; i < result.size(); ++i) {
-        for (int j = 0; j < result[i].size(); ++j) {
-            std::cout << result[i][j] << "，";
-        }
-        std::cout << endl;
-    }
-    return 0;
 }
