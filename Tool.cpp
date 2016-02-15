@@ -61,9 +61,13 @@ void IntVector2DPrint(const vector<vector<int>> &vec)
     printf("[\n");
     for (size_t i = 0; i < vec.size(); i++)
     {
-        printf("[ ");
-        for (size_t j = 0; j < vec[i].size(); j++)
-            printf("%d, ", vec[i][j]);
+        printf("    [ ");
+        for (size_t j = 0; j < vec[i].size(); j++) {
+            printf("%d", vec[i][j]);
+            if (j != vec[i].size() - 1) {
+                printf(", ");
+            }
+        }
         printf(" ]\n");
     }
     printf("]\n");
